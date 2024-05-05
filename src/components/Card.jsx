@@ -1,7 +1,6 @@
 import React from 'react'
 
 const Card = ({jobid, companyName, description, jobTitle, location, minExp, jdLink,logoUrl}) => {
-  console.log(jobid);
   return (
     <div id='jobid' className='job-card-body'>
       <div className='info-wrapper d-flex'>
