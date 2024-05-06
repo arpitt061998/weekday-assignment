@@ -1,13 +1,41 @@
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addRoleFilter,addMinExp, addSearchedTitle, addLocation} from "../utils/filtersSlice";
+
 const Header = () => {
   const options = ["Frontend","Backend","Tech Lead","Andriod"];
   const experienceRange = Array.from({ length: 10 }, (_, index) => index + 1);
-  const location = ["Remote", "Hybrid", "In-office"];
+  const locationArr = ["Remote", "Hybrid", "In-office"];
   const salaryRange = [0,10,20,30,40,50,60,70,80,90];
+  const [roleValue, setRoleValue] = useState("");
+  const [minExpValue, setMinExpValue]= useState("");
+  const [searchText, setSearchText] = useState("");
+  const [location, setLocation] = useState("");
+  const dispatch = useDispatch();
+
+  const handleOperations = (e) => {
+    if(e.currentTarget.classList.contains("roles")){
+      setRoleValue(e?.currentTarget?.value)
+      dispatch(addRoleFilter(e?.currentTarget?.value));
+    }
+    else if(e.currentTarget.classList.contains("minexp")){
+      setMinExpValue(e.currentTarget.value)
+      dispatch(addMinExp(e?.currentTarget?.value));
+    }
+    else if(e.currentTarget.classList.contains("search")){
+      setSearchText(e.currentTarget.value)
+      dispatch(addSearchedTitle(e?.currentTarget?.value));
+    }
+    else if(e.currentTarget.classList.contains("location")){
+      setLocation(e.currentTarget.value);
+      dispatch(addLocation(e?.currentTarget?.value))
+    }
+  }
 
   return (
     <div className="filter-wrapper d-flex">
       <div className="role-wrapper">
-        <select>
+        <select className = "roles" value = {roleValue} onChange={handleOperations}>
           <option value="">Select an option...</option>
           {options.map(option => (
             <option key={option} value={option}>
@@ -17,27 +45,27 @@ const Header = () => {
         </select>
       </div>
       <div className="exp-wrapper">
-        <select>
+        <select className = "minexp" value = {minExpValue} onChange={handleOperations}>
           <option value="">Experience</option>
           {experienceRange.map(option => (
             <option key={option} value={option}>
               {option}
             </option>
           ))}
-        </select>  
+        </select>
       </div>
       <div className="location-wrapper">
-        <select>
-          <option value="">Remote</option>
-          {location.map(option => (
+        <select className = "location" value={location} onChange={handleOperations}>
+          <option value="">Location</option>
+          {locationArr.map(option => (
             <option key={option} value={option}>
               {option}
             </option>
           ))}
-        </select>  
+        </select>
       </div>
-      <div className="minimun-base-salary-wrapper">
-        <select>
+      <div className="minimum-base-salary-wrapper">
+        <select className = "min-salary" onChange={handleOperations}>
           <option value="">Minimum Base Pay Salary </option>
           {salaryRange.map(option => (
             <option key={option} value={option}>
@@ -47,7 +75,7 @@ const Header = () => {
         </select>
       </div>
       <div className="search-wrapper">
-        <input className="search" placeholder="Search Company Name"/>
+        <input value ={searchText} className="search" placeholder="Search Company Name" onChange = {handleOperations}/>
       </div>
     </div>
   )
