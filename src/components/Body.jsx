@@ -111,7 +111,6 @@ const Body = () => {
           }
         }
 
-        // Handle additional filters if needed
         return true; // Return true for unhandled filters
       });
     }) : jobList;
