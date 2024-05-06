@@ -11,6 +11,11 @@ const Body = () => {
   const {jobData:jobList,filteredJob:filteredJob} = useSelector( store => store.jobs)
   const filtersList = useSelector(store => store.filters);
   
+  const setBodyTopMargin = () => {
+    var filterHeight = document.querySelector(".filter-wrapper").clientHeight;
+    if(document.querySelector(".cards-wrapper"))
+      document.querySelector(".cards-wrapper").style.marginTop = `calc(${filterHeight}px + 20px)`;
+  }
   const fetchData = async (limit, offset) => {
     const body = JSON.stringify({
       limit: limit,
@@ -45,6 +50,20 @@ const Body = () => {
         else if(key === "searchedText" && value!=""){
           return job.companyName.toLowerCase().includes(value.toLowerCase());
         }
+        else if(key === "minSalary" && value!=="") {
+          return job.minJdSalary >= value;
+        }
+        else if(key === "location" && value!=""){
+          if(value.toLowerCase() === "remote"){
+            return job.location.toLowerCase().includes(value.toLowerCase());
+          }
+          else if(value.toLowerCase() === "hybrid"){
+            return job.location.toLowerCase().includes(value.toLowerCase());
+          }
+          else {
+            return !((job.location.toLowerCase().includes("remote") || job.location.toLowerCase().includes("hybrid")));
+          }
+        }
 
         // Handle additional filters if needed
         return true; // Return true for unhandled filters
@@ -60,6 +79,7 @@ const Body = () => {
       dispatch(addJobData(initialJobs))
       dispatch(updateFilteredJobData(initialJobs));
       setOffset(12);
+      setBodyTopMargin();
     });
   }, []);
 
@@ -76,6 +96,20 @@ const Body = () => {
         else if(key === "searchedText" && value!="") {
           return job.companyName.toLowerCase().includes(value.toLowerCase());
         }
+        else if(key === "minSalary" && value!=="") {
+          return job.minJdSalary >= value;
+        }
+        else if(key === "location" && value!=""){
+          if(value.toLowerCase() === "remote"){
+            return job.location.toLowerCase().includes(value.toLowerCase());
+          }
+          else if(value.toLowerCase() === "hybrid"){
+            return job.location.toLowerCase().includes(value.toLowerCase());
+          }
+          else {
+            return !((job.location.toLowerCase().includes("remote") || job.location.toLowerCase().includes("hybrid")));
+          }
+        }
 
         // Handle additional filters if needed
         return true; // Return true for unhandled filters
@@ -84,7 +118,7 @@ const Body = () => {
     dispatch(updateFilteredJobData(filteredJobs))
   },[filtersList]);
 
-  return (filteredJob && filteredJob.length === 0) ? (<div>Loading...</div>) : (
+  return (filteredJob && filteredJob.length === 0) ? (Object.values(filtersList).some(value => value !== "") ? <h2 className='no-jobs'>No Jobs found!</h2> : <div>Loading...</div>) : (
     <>
     <div className='cards-wrapper'>
       {filteredJob.map((job) => (

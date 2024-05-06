@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addRoleFilter,addMinExp, addSearchedTitle, addLocation} from "../utils/filtersSlice";
+import { addRoleFilter,addMinExp, addSearchedTitle, addLocation, addMinSalary } from "../utils/filtersSlice";
 
 const Header = () => {
   const options = ["Frontend","Backend","Tech Lead","Andriod"];
@@ -11,6 +11,7 @@ const Header = () => {
   const [minExpValue, setMinExpValue]= useState("");
   const [searchText, setSearchText] = useState("");
   const [location, setLocation] = useState("");
+  const [minSalary, setMinSalary] = useState("");
   const dispatch = useDispatch();
 
   const handleOperations = (e) => {
@@ -29,6 +30,10 @@ const Header = () => {
     else if(e.currentTarget.classList.contains("location")){
       setLocation(e.currentTarget.value);
       dispatch(addLocation(e?.currentTarget?.value))
+    }
+    else if(e.currentTarget.classList.contains("min-salary")){
+      setMinSalary(e.currentTarget.value);
+      dispatch(addMinSalary(e?.currentTarget?.value));
     }
   }
 
@@ -65,11 +70,11 @@ const Header = () => {
         </select>
       </div>
       <div className="minimum-base-salary-wrapper">
-        <select className = "min-salary filters" onChange={handleOperations}>
+        <select className = "min-salary filters" value = {minSalary} onChange={handleOperations}>
           <option value="">Minimum Base Pay Salary </option>
           {salaryRange.map(option => (
             <option key={option} value={option}>
-              {option}
+              {option}L
             </option>
           ))}
         </select>
