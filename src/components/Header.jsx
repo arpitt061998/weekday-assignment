@@ -35,8 +35,8 @@ const Header = () => {
   return (
     <div className="filter-wrapper d-flex">
       <div className="role-wrapper">
-        <select className = "roles" value = {roleValue} onChange={handleOperations}>
-          <option value="">Select an option...</option>
+        <select className = "roles filters" value = {roleValue} onChange={handleOperations}>
+          <option value="">Roles</option>
           {options.map(option => (
             <option key={option} value={option}>
               {option}
@@ -45,7 +45,7 @@ const Header = () => {
         </select>
       </div>
       <div className="exp-wrapper">
-        <select className = "minexp" value = {minExpValue} onChange={handleOperations}>
+        <select className = "minexp filters" value = {minExpValue} onChange={handleOperations}>
           <option value="">Experience</option>
           {experienceRange.map(option => (
             <option key={option} value={option}>
@@ -55,7 +55,7 @@ const Header = () => {
         </select>
       </div>
       <div className="location-wrapper">
-        <select className = "location" value={location} onChange={handleOperations}>
+        <select className = "location filters" value={location} onChange={handleOperations}>
           <option value="">Location</option>
           {locationArr.map(option => (
             <option key={option} value={option}>
@@ -65,7 +65,7 @@ const Header = () => {
         </select>
       </div>
       <div className="minimum-base-salary-wrapper">
-        <select className = "min-salary" onChange={handleOperations}>
+        <select className = "min-salary filters" onChange={handleOperations}>
           <option value="">Minimum Base Pay Salary </option>
           {salaryRange.map(option => (
             <option key={option} value={option}>
@@ -75,7 +75,7 @@ const Header = () => {
         </select>
       </div>
       <div className="search-wrapper">
-        <input value ={searchText} className="search" placeholder="Search Company Name" onChange = {handleOperations}/>
+        <input value ={searchText} className="search filters" placeholder="Search Company Name" onChange = {handleOperations}/>
       </div>
     </div>
   )

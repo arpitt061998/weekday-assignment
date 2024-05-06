@@ -88,7 +88,7 @@ const Body = () => {
     <>
     <div className='cards-wrapper'>
       {filteredJob.map((job) => (
-        <Card key={job.jdUid} jobid={job.jdUid} companyName={job.companyName} description={job.jobDetailsFromCompany} jobTitle={job.jobRole} location={job.location} minExp={job.minExp} jdLink={job.jdLink} logoUrl={job.logoUrl} />
+        <Card key={job.jdUid} jobid={job.jdUid} companyName={job.companyName} description={job.jobDetailsFromCompany} jobTitle={job.jobRole} location={job.location} minExp={job.minExp} jdLink={job.jdLink} logoUrl={job.logoUrl} maxJdSalary = {job.maxJdSalary} minJdSalary={job.minJdSalary} />
       ))}
     </div>
     <InfiniteScroll  // implemented infinite scroll functionality using react-infinite-scroll-library
