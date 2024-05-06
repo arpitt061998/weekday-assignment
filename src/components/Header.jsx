@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { addRoleFilter,addMinExp, addSearchedTitle, addLocation, addMinSalary } from "../utils/filtersSlice";
 
 const Header = () => {
-  const options = ["Frontend","Backend","Tech Lead","Andriod"];
+  const options = ["Frontend","Backend","Tech Lead","Android","Ios"];
   const experienceRange = Array.from({ length: 10 }, (_, index) => index + 1);
   const locationArr = ["Remote", "Hybrid", "In-office"];
   const salaryRange = [0,10,20,30,40,50,60,70,80,90];
