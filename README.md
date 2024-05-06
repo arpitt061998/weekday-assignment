@@ -1,3 +1,5 @@
+## LIVE LINK[https://weekday-assignment-rust.vercel.app/]
+
 ## Prerequisites
 
 Before you begin, ensure you have met the following requirements:
