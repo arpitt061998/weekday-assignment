@@ -1,4 +1,4 @@
-## LIVE LINK[https://weekday-assignment-rust.vercel.app/]
+## [LIVE LINK](https://weekday-assignment-rust.vercel.app/)
 
 ## Prerequisites
 
